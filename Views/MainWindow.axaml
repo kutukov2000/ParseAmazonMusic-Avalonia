@@ -1,0 +1,88 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ParseAmazonMusic.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ParseAmazonMusic.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ParseAmazonMusic"
+		MaxWidth="700"
+		MaxHeight="400"
+		MinWidth="700"
+		MinHeight="400"
+		WindowStartupLocation="CenterScreen">
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+	<StackPanel>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="3*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBox Grid.Column="0"
+					 Margin="5"
+					 Text="{Binding Url}"/>
+			<Button Grid.Column="1"
+					Margin="5"
+					Content="Search"
+					Command="{Binding LoadSongsCommand}"/>
+		</Grid>
+
+		<DockPanel Margin="0 0 0 10">
+			<Image asyncImageLoader:ImageLoader.Source="{Binding Playlist.Image}"
+				   DockPanel.Dock="Left"
+				   Margin="10 0 0 0"
+				   Width="150"
+				   Height="150"/>
+			<StackPanel VerticalAlignment="Center" Margin="10">
+				<TextBlock Text="{Binding Playlist.Type}" Foreground="#25d1da" FontWeight="Bold" FontSize="12"/>
+				<TextBlock Text="{Binding Playlist.Title}" FontWeight="Bold" FontSize="60"/>
+				<TextBlock Text="{Binding Playlist.PrimaryText}" FontSize="16"/>
+				<TextBlock Text="{Binding Playlist.SecondaryText}" FontSize="14" Opacity="0.6"/>
+				<TextBlock Text="{Binding Playlist.TertiaryText}" FontSize="13" Opacity="0.6"/>
+			</StackPanel>
+		</DockPanel>
+
+		<ListBox ItemsSource="{Binding Songs}"
+				 Height="200"
+				 ScrollViewer.VerticalScrollBarVisibility="Visible">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="25"/>
+							<ColumnDefinition Width="50"/>
+							<ColumnDefinition Width="3*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Column="0"
+								   Text="{Binding Id}"
+								   VerticalAlignment="Center"/>
+						<Image Grid.Column="1"
+							   asyncImageLoader:ImageLoader.Source="{Binding Image}"/>
+						<StackPanel Grid.Column="2"
+									Margin="10 0 0 0"
+									VerticalAlignment="Center">
+							<TextBlock Text="{Binding Name}"
+									   VerticalAlignment="Center"/>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="{Binding Author}"/>
+								<TextBlock Text="{Binding Album}"/>
+							</StackPanel>
+						</StackPanel>
+						<TextBlock Grid.Column="3"
+								   Text="{Binding Duration}"
+								   VerticalAlignment="Center"/>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</StackPanel>
+
+</Window>
