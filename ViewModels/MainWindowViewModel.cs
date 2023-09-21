@@ -10,40 +10,6 @@ using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
 namespace ParseAmazonMusic.ViewModels;
-partial class Playlist : ObservableObject
-{
-    [ObservableProperty]
-    private string _image;
-    [ObservableProperty]
-    public string _title;
-    [ObservableProperty]
-    public string _primaryText;
-    [ObservableProperty]
-    public string _secondaryText;
-    [ObservableProperty]
-    public string _tertiaryText;
-    [ObservableProperty]
-    public string _type;
-
-    public void Clear()
-    {
-        Image = string.Empty;
-        Title = string.Empty;
-        PrimaryText = string.Empty;
-        SecondaryText = string.Empty;
-        TertiaryText = string.Empty;
-        Type = string.Empty;
-    }
-}
-public class Song
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Author { get; set; }
-    public string Album { get; set; }
-    public string Duration { get; set; }
-    public string Image { get; set; }
-}
 partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
@@ -52,16 +18,11 @@ partial class MainWindowViewModel : ViewModelBase
     private Playlist _playlist;
     [ObservableProperty]
     private ObservableCollection<Song> _songs;
-
-    [ObservableProperty]
-    private string _status;
     public MainWindowViewModel()
     {
         Url = "https://music.amazon.com/playlists/B01M11SBC8";
-        //Url = "https://music.amazon.com/playlists/B09GJHXSN1";
         Playlist = new Playlist();
         Songs = new ObservableCollection<Song>();
-        Status = "ctor";
     }
     private void ParsePlaylist(IWebDriver driver)
     {
