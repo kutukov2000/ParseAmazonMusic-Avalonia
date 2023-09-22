@@ -8,4 +8,5 @@ public class Song
     public string Album { get; set; }
     public string Duration { get; set; }
     public string Image { get; set; }
+    public string AlbumTxtHeight { get; set; }
 }

@@ -41,7 +41,7 @@
 				   Height="150"/>
 			<StackPanel VerticalAlignment="Center" Margin="10">
 				<TextBlock Text="{Binding Playlist.Type}" Foreground="#25d1da" FontWeight="Bold" FontSize="12"/>
-				<TextBlock Text="{Binding Playlist.Title}" FontWeight="Bold" FontSize="60"/>
+				<TextBlock Text="{Binding Playlist.Title}" FontWeight="Bold" FontSize="60" TextWrapping="Wrap"/>
 				<TextBlock Text="{Binding Playlist.PrimaryText}" FontSize="16"/>
 				<TextBlock Text="{Binding Playlist.SecondaryText}" FontSize="14" Opacity="0.6"/>
 				<TextBlock Text="{Binding Playlist.TertiaryText}" FontSize="13" Opacity="0.6"/>
@@ -71,7 +71,7 @@
 									VerticalAlignment="Center">
 							<TextBlock Text="{Binding Name}"
 									   VerticalAlignment="Center"/>
-							<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Horizontal" Height="{Binding AlbumTxtHeight}">
 								<TextBlock Text="{Binding Author}"/>
 								<TextBlock Text="{Binding Album}"/>
 							</StackPanel>

@@ -41,7 +41,8 @@ partial class MainWindowViewModel : ViewModelBase
                     Album = songs[i].GetAttribute("secondary-text-2"),
                     Author = songs[i].GetAttribute("secondary-text-1"),
                     Image = songs[i].GetAttribute("image-src"),
-                    Duration = driver.FindElement(By.CssSelector($"#Web\\.TemplatesInterface\\.v1_0\\.Touch\\.DetailTemplateInterface\\.DetailTemplate_1 > music-container > div > div > div._1xpp05rcYIwWA_tv8t2Aac > div > div > music-image-row:nth-child({i + 1}) > div > div.col4 > music-link > span")).Text
+                    Duration = driver.FindElement(By.CssSelector($"#Web\\.TemplatesInterface\\.v1_0\\.Touch\\.DetailTemplateInterface\\.DetailTemplate_1 > music-container > div > div > div._1xpp05rcYIwWA_tv8t2Aac > div > div > music-image-row:nth-child({i + 1}) > div > div.col4 > music-link > span")).Text,
+                    AlbumTxtHeight = string.Empty
                 });
             }
         }
@@ -64,7 +65,8 @@ partial class MainWindowViewModel : ViewModelBase
                 {
                     Id = i + 1,
                     Name = songs[i].GetAttribute("primary-text"),
-                    Duration = driver.FindElement(By.CssSelector($"#Web\\.TemplatesInterface\\.v1_0\\.Touch\\.DetailTemplateInterface\\.DetailTemplate_1 > music-container > div > div > div._1xpp05rcYIwWA_tv8t2Aac > div > div > music-text-row:nth-child({i + 1}) > div.content > div.col4 > music-link > span")).Text
+                    Duration = driver.FindElement(By.CssSelector($"#Web\\.TemplatesInterface\\.v1_0\\.Touch\\.DetailTemplateInterface\\.DetailTemplate_1 > music-container > div > div > div._1xpp05rcYIwWA_tv8t2Aac > div > div > music-text-row:nth-child({i + 1}) > div.content > div.col4 > music-link > span")).Text,
+                    AlbumTxtHeight = "0"
                 });
             }
         }
@@ -95,7 +97,9 @@ partial class MainWindowViewModel : ViewModelBase
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
-            var desc = driver.FindElement(By.XPath("//*[@id=\"root\"]/music-app/div/div/div/div/music-detail-header"));
+            //var desc = driver.FindElement(By.XPath("//*[@id=\"root\"]/music-app/div/div/div/div/music-detail-header"));
+            //var desc = driver.FindElement(By.XPath("#atf > music-detail-header"));
+            var desc = driver.FindElement(By.XPath("//*[@id=\"atf\"]/music-detail-header"));
 
             Playlist.Title = desc.GetAttribute("headline");
             Playlist.PrimaryText = desc.GetAttribute("primary-text");
