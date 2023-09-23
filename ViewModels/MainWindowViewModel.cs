@@ -97,8 +97,6 @@ partial class MainWindowViewModel : ViewModelBase
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
 
-            //var desc = driver.FindElement(By.XPath("//*[@id=\"root\"]/music-app/div/div/div/div/music-detail-header"));
-            //var desc = driver.FindElement(By.XPath("#atf > music-detail-header"));
             var desc = driver.FindElement(By.XPath("//*[@id=\"atf\"]/music-detail-header"));
 
             Playlist.Title = desc.GetAttribute("headline");
